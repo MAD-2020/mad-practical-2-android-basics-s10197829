@@ -3,6 +3,7 @@ package com.example.whack_a_mole;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         int numClicked;
         randomLocation = ran.nextInt(3);
 
-        Button1_Button.setText("0");
-        Button2_Button.setText("0");
-        Button3_Button.setText("0");
+        Button1_Button.setText("O");
+        Button2_Button.setText("O");
+        Button3_Button.setText("O");
 
         if (randomLocation == 0) {
             Button1_Button.setText("*");
@@ -71,12 +72,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkIfHit(int num1, int num2){
+        String buttonPos;
+        if(num1 == 0){
+            buttonPos = "Left";
+        } else if (num1 == 1) {
+            buttonPos = "Middle";
+        }
+        else {
+            buttonPos = "Right";
+        }
 
+        Log.v("Whack-A-Mole", buttonPos + " button clicked!");
         if (num1 == num2) {
             score ++;
+            Log.v("Whack-A-Mole", "Hit, score added!");
         } else {
             score --;
+            Log.v("Whack-A-Mole", "Missed, score deducted!");
         }
+
+
         Score_View.setText(String.valueOf(score));
         setNewMole();
     }
